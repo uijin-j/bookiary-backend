@@ -1,0 +1,16 @@
+bootJar.enabled = true
+jar.enabled = false
+
+dependencies {
+    // Spring Boot
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    // Swagger
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0'
+
+    // Test
+    testRuntimeOnly 'com.h2database:h2'
+
+    implementation project(':bookiary-application')
+}
