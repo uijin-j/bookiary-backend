@@ -2,11 +2,5 @@ bootJar.enabled = false
 jar.enabled = true
 
 dependencies {
-    // Spring Boot
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-
-    // PostgreSQL
-    implementation 'org.postgresql:postgresql'
-
     implementation project(':bookiary-domain')
 }
