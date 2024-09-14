@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  bookiary-db:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: ${DATABASE}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "${DB_PORT}:5432"
