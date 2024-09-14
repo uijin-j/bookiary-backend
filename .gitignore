@@ -203,3 +203,4 @@ gradle-app.setting
 # Custom ignores
 .idea/
 .env
+**/main/**/application.yml
