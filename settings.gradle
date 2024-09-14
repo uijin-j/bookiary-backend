@@ -1,1 +1,6 @@
 rootProject.name = 'bookiary-backed'
+
+include 'bookiary-presentation'
+include 'bookiary-application'
+include 'bookiary-domain'
+include 'bookiary-infrastructure'
