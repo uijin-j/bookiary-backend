@@ -7,4 +7,6 @@ dependencies {
 
     // PostgreSQL
     implementation 'org.postgresql:postgresql'
+
+    runtimeOnly project(':bookiary-infrastructure')
 }
