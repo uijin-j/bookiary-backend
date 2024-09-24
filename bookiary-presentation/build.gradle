@@ -16,4 +16,5 @@ dependencies {
     testRuntimeOnly 'com.h2database:h2'
 
     implementation project(':bookiary-application')
+    implementation project(':bookiary-infrastructure')
 }
