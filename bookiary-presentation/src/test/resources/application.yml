@@ -8,3 +8,9 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: create-drop
+
+jwt:
+  issuer: issuer
+  secret-key: 78c1411b9579068358fa217f4f006054990c1792fe6e2a3a642c81db73d5d0b0ee1eb2djhfuhufjwdnajkshuaqibjh
+  expires_in: 60
+  refresh-expires_in: 10080
