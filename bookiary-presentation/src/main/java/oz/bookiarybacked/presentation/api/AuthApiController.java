@@ -7,12 +7,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import oz.bookiarybacked.application.auth.AuthService;
+import oz.bookiarybacked.application.auth.dto.request.ReissueTokenReq;
 import oz.bookiarybacked.application.auth.dto.response.LoginRes;
 
 @RestController
@@ -52,6 +55,21 @@ public class AuthApiController {
 		@RequestParam String code
 	) {
 		LoginRes response = authService.socialLogin(provider, code);
+		ApiResult<LoginRes> result = ApiResult.ok(response);
+
+		return ResponseEntity.ok(result);
+	}
+
+	/**
+	 * 액세스 토큰 재발급을 처리하는 메서드 (자동 로그인)
+	 * @param request 자동 로그인 요청 (Refresh Token)
+	 * @return 자동 로그인 응답 (Access Token / Refresh Token)
+	 */
+	@PostMapping("/auth/reissue")
+	public ResponseEntity<ApiResult<LoginRes>> reissue(
+		@RequestBody @Valid ReissueTokenReq request
+	) {
+		LoginRes response = authService.reissue(request);
 		ApiResult<LoginRes> result = ApiResult.ok(response);
 
 		return ResponseEntity.ok(result);
