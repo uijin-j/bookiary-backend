@@ -17,3 +17,18 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
+
+jwt:
+  issuer: issuer
+  secret-key: secret-key
+  expires_in: 60 # 60분
+  refresh-expires_in: 10080 # 7일 (7*24*60)
+
+oauth:
+  kakao:
+    authorization_code_request_uri: https://kauth.kakao.com/oauth/authorize
+    token_request_uri: https://kauth.kakao.com/oauth/token
+    token_info_request_uri: https://kapi.kakao.com/v1/user/access_token_info
+    client_id: client_id
+    redirect_uri: redirect_uri
+    client_secret: client_secret
