@@ -13,9 +13,9 @@ import oz.bookiarybacked.config.properties.KakaoOAuthProperties;
 import oz.bookiarybacked.domain.auth.dto.OAuthUser;
 import oz.bookiarybacked.domain.auth.model.AuthProviderType;
 import oz.bookiarybacked.domain.auth.service.OAuthManager;
-import oz.bookiarybacked.infra.auth.oauth.kakao.dto.TokenInfo;
-import oz.bookiarybacked.infra.auth.oauth.kakao.dto.TokenRequestBody;
-import oz.bookiarybacked.infra.auth.oauth.kakao.dto.TokenResponse;
+import oz.bookiarybacked.infra.auth.oauth.kakao.dto.AccessTokenInfo;
+import oz.bookiarybacked.infra.auth.oauth.kakao.dto.AccessTokenReqBody;
+import oz.bookiarybacked.infra.auth.oauth.kakao.dto.AccessTokenRes;
 
 @Component
 public class KakaoOAuthManager implements OAuthManager {
@@ -65,16 +65,16 @@ public class KakaoOAuthManager implements OAuthManager {
 	@Override
 	public OAuthUser retrieveOAuthUser(String code) {
 		// Step 1. 인증 서버에서 AT 발급
-		TokenResponse response = kaKaoApiService.sendAccessTokenRequest(buildTokenRequestBody(code), tokenRequestUri);
+		AccessTokenRes response = kaKaoApiService.sendAccessTokenRequest(buildTokenRequestBody(code), tokenRequestUri);
 		String accessToken = response.accessToken();
 
 		// Step 2. AT로 사용자 정보 요청
-		TokenInfo tokenInfo = kaKaoApiService.sendTokenInfoRequest(accessToken, tokenInfoRequestUri);
-		return OAuthUser.of(KAKAO, String.valueOf(tokenInfo.memberId()));
+		AccessTokenInfo accessTokenInfo = kaKaoApiService.sendTokenInfoRequest(accessToken, tokenInfoRequestUri);
+		return OAuthUser.of(KAKAO, String.valueOf(accessTokenInfo.memberId()));
 	}
 
-	private TokenRequestBody buildTokenRequestBody(String code) {
-		return TokenRequestBody.builder()
+	private AccessTokenReqBody buildTokenRequestBody(String code) {
+		return AccessTokenReqBody.builder()
 			.grantType(AUTHORIZATION_CODE)
 			.clientId(clientId)
 			.redirectUri(redirectUri)

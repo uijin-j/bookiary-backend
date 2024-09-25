@@ -1,11 +1,11 @@
 package oz.bookiarybacked.infra.auth.oauth.kakao;
 
-import oz.bookiarybacked.infra.auth.oauth.kakao.dto.TokenInfo;
-import oz.bookiarybacked.infra.auth.oauth.kakao.dto.TokenRequestBody;
-import oz.bookiarybacked.infra.auth.oauth.kakao.dto.TokenResponse;
+import oz.bookiarybacked.infra.auth.oauth.kakao.dto.AccessTokenInfo;
+import oz.bookiarybacked.infra.auth.oauth.kakao.dto.AccessTokenReqBody;
+import oz.bookiarybacked.infra.auth.oauth.kakao.dto.AccessTokenRes;
 
 public interface KakaoApiService {
-	TokenResponse sendAccessTokenRequest(TokenRequestBody body, String uri);
+	AccessTokenRes sendAccessTokenRequest(AccessTokenReqBody body, String uri);
 
-	TokenInfo sendTokenInfoRequest(String accessToken, String tokenInfoRequestUri);
+	AccessTokenInfo sendTokenInfoRequest(String accessToken, String tokenInfoRequestUri);
 }

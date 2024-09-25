@@ -6,7 +6,7 @@ import org.springframework.util.MultiValueMap;
 import lombok.Builder;
 
 @Builder
-public record TokenRequestBody(
+public record AccessTokenReqBody(
 	String grantType,
 	String clientId,
 	String redirectUri,

@@ -2,7 +2,7 @@ package oz.bookiarybacked.infra.auth.oauth.kakao.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public record TokenResponse(
+public record AccessTokenRes(
 	@JsonProperty("token_type")
 	String tokenType,
 	@JsonProperty("access_token")

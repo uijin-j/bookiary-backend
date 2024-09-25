@@ -7,9 +7,9 @@ import org.springframework.web.client.RestClient;
 
 import lombok.RequiredArgsConstructor;
 import oz.bookiarybacked.infra.auth.oauth.kakao.KakaoApiService;
-import oz.bookiarybacked.infra.auth.oauth.kakao.dto.TokenInfo;
-import oz.bookiarybacked.infra.auth.oauth.kakao.dto.TokenRequestBody;
-import oz.bookiarybacked.infra.auth.oauth.kakao.dto.TokenResponse;
+import oz.bookiarybacked.infra.auth.oauth.kakao.dto.AccessTokenInfo;
+import oz.bookiarybacked.infra.auth.oauth.kakao.dto.AccessTokenReqBody;
+import oz.bookiarybacked.infra.auth.oauth.kakao.dto.AccessTokenRes;
 
 @Service
 @RequiredArgsConstructor
@@ -19,21 +19,21 @@ public class RestClientKakaoApiService implements KakaoApiService {
 	private static final RestClient REST_CLIENT = RestClient.create();
 
 	@Override
-	public TokenResponse sendAccessTokenRequest(TokenRequestBody body, String tokenRequestBaseUri) {
+	public AccessTokenRes sendAccessTokenRequest(AccessTokenReqBody body, String tokenRequestBaseUri) {
 		return REST_CLIENT.post()
 			.uri(tokenRequestBaseUri)
 			.contentType(APPLICATION_FORM_URLENCODED)
 			.body(body.toMap())
 			.retrieve()
-			.body(TokenResponse.class);
+			.body(AccessTokenRes.class);
 	}
 
 	@Override
-	public TokenInfo sendTokenInfoRequest(String accessToken, String tokenInfoRequestUri) {
+	public AccessTokenInfo sendTokenInfoRequest(String accessToken, String tokenInfoRequestUri) {
 		return REST_CLIENT.get()
 			.uri(tokenInfoRequestUri)
 			.header(AUTHORIZATION, TOKEN_PREFIX + accessToken)
 			.retrieve()
-			.body(TokenInfo.class);
+			.body(AccessTokenInfo.class);
 	}
 }
