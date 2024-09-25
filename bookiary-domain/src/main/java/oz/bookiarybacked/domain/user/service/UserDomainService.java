@@ -1,8 +1,11 @@
 package oz.bookiarybacked.domain.user.service;
 
+import static oz.bookiarybacked.exception.ErrorMessages.*;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import oz.bookiarybacked.domain.user.model.User;
 import oz.bookiarybacked.domain.user.repository.UserRepository;
@@ -13,8 +16,8 @@ import oz.bookiarybacked.domain.user.repository.UserRepository;
 public class UserDomainService {
 	private final UserRepository userRepository;
 
-	@Transactional
-	public User signup() {
-		return userRepository.save(User.signUp());
+	public User getById(Long userId) {
+		return userRepository.findById(userId)
+			.orElseThrow(() -> new EntityNotFoundException(USER_NOT_FOUND));
 	}
 }
