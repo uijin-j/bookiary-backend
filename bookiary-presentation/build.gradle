@@ -5,6 +5,7 @@ dependencies {
     // Spring Boot
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
 
     // 예외처리 때문에 추가
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
@@ -16,5 +17,6 @@ dependencies {
     testRuntimeOnly 'com.h2database:h2'
 
     implementation project(':bookiary-application')
+    implementation project(':bookiary-domain')
     implementation project(':bookiary-infrastructure')
 }
