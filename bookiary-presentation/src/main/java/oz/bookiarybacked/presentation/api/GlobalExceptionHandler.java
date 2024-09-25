@@ -1,4 +1,4 @@
-package oz.bookiarybacked.presentation.exception;
+package oz.bookiarybacked.presentation.api;
 
 import static org.springframework.http.HttpStatus.*;
 
@@ -13,7 +13,7 @@ import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import oz.bookiarybacked.presentation.api.ApiResult;
+import oz.bookiarybacked.exception.ForbiddenException;
 
 @RestControllerAdvice
 @RequiredArgsConstructor
@@ -32,7 +32,7 @@ public class GlobalExceptionHandler {
 		return ResponseEntity.badRequest()
 			.body(result);
 	}
-	
+
 	@ExceptionHandler(IllegalArgumentException.class)
 	public ResponseEntity<ApiResult<Void>> handleIllegalArgumentException(IllegalArgumentException e) {
 		log.debug(e.getMessage(), e.fillInStackTrace());
@@ -51,6 +51,17 @@ public class GlobalExceptionHandler {
 
 		return ResponseEntity
 			.status(NOT_FOUND)
+			.body(result);
+	}
+
+	@ExceptionHandler(ForbiddenException.class)
+	public ResponseEntity<ApiResult<Void>> handleForbiddenException(ForbiddenException e) {
+		log.debug(e.getMessage(), e.fillInStackTrace());
+
+		ApiResult<Void> result = ApiResult.error(FORBIDDEN, e.getMessage());
+
+		return ResponseEntity
+			.status(FORBIDDEN)
 			.body(result);
 	}
 
