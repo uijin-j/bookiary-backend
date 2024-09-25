@@ -1,5 +1,7 @@
 package oz.bookiarybacked.domain.auth.model;
 
+import static oz.bookiarybacked.exception.ErrorMessages.*;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,6 +13,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import oz.bookiarybacked.exception.TokenValidationFailException;
 
 @Entity
 @Table(name = "refresh_token")
@@ -39,5 +42,15 @@ public class RefreshToken {
 			.token(token)
 			.expireAt(expireAt)
 			.build();
+	}
+
+	public void validate(String refreshToken) {
+		if (!token.equals(refreshToken)) {
+			throw new TokenValidationFailException(INVALID_TOKEN);
+		}
+	}
+
+	public boolean isExpired() {
+		return System.currentTimeMillis() > expireAt;
 	}
 }
