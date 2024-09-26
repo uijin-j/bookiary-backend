@@ -26,7 +26,7 @@ public class AuthApiController {
 	private final AuthService authService;
 
 	/**
-	 * 소셜 로그인 페이지로 리다이렉트하는 메서드 (ex. 카카오 로그인 페이지)
+	 * 소셜 로그인 페이지 조회 API (ex. 카카오 로그인 페이지)
 	 * @param provider OAuth 제공자
 	 *  - 카카오: /api/oauth/kakao (🔗: https://developers.kakao.com/docs/latest/ko/kakaologin/rest-api)
 	 */
@@ -44,8 +44,8 @@ public class AuthApiController {
 	}
 
 	/**
-	 * 로그인 요청을 처리하는 메서드
-	 * @param provider OAuth 제공자
+	 * 로그인 API
+	 * @param provider OAuth 제공자 (ex. kakao)
 	 * @param code OAuth 인증 코드
 	 * @return 로그인 응답 (Access Token / Refresh Token)
 	 */
@@ -61,7 +61,7 @@ public class AuthApiController {
 	}
 
 	/**
-	 * 액세스 토큰 재발급을 처리하는 메서드 (자동 로그인)
+	 * 액세스 토큰 재발급 API (자동 로그인)
 	 * @param request 자동 로그인 요청 (Refresh Token)
 	 * @return 자동 로그인 응답 (Access Token / Refresh Token)
 	 */

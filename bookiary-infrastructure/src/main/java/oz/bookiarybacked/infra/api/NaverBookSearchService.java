@@ -12,6 +12,10 @@ import oz.bookiarybacked.application.common.dto.Page;
 import oz.bookiarybacked.config.properties.NaverSearchProperties;
 import oz.bookiarybacked.infra.api.dto.response.BookSearchRes;
 
+/**
+ * 네이버 책 검색 서비스
+ * - https://developers.naver.com/docs/serviceapi/search/book/book.md#%EC%B1%85-%EA%B2%80%EC%83%89-%EA%B2%B0%EA%B3%BC-%EC%A1%B0%ED%9A%8C
+ */
 @Service
 @RequiredArgsConstructor
 public class NaverBookSearchService implements BookSearchService {
