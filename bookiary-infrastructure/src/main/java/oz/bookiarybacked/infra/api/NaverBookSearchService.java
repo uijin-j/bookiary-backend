@@ -1,5 +1,7 @@
 package oz.bookiarybacked.infra.api;
 
+import java.util.Objects;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -27,13 +29,14 @@ public class NaverBookSearchService implements BookSearchService {
 
 	@Override
 	public Page<BookDto> search(BookSearchParam searchParam) {
-		return REST_CLIENT.get()
-			.uri(buildUri(searchParam))
-			.header(CLIENT_ID, properties.clientId())
-			.header(CLIENT_SECRET, properties.clientSecret())
-			.retrieve()
-			.body(BookSearchRes.class)
-			.toPage();
+		return Objects.requireNonNull(
+			REST_CLIENT.get()
+				.uri(buildUri(searchParam))
+				.header(CLIENT_ID, properties.clientId())
+				.header(CLIENT_SECRET, properties.clientSecret())
+				.retrieve()
+				.body(BookSearchRes.class)
+		).toPage();
 	}
 
 	private String buildUri(BookSearchParam param) {
