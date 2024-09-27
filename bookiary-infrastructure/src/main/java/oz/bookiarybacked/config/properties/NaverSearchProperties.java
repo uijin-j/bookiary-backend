@@ -6,6 +6,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public record NaverSearchProperties(
 	String clientId,
 	String clientSecret,
-	String searchRequestUri
+	String searchRequestUri,
+	String searchDetailRequestUri
 ) {
 }
