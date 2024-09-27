@@ -12,6 +12,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import oz.bookiarybacked.common.BaseTimeEntity;
+import oz.bookiarybacked.domain.book.model.Book;
 
 @Entity
 @Table(name = "users")
@@ -32,5 +33,10 @@ public class User extends BaseTimeEntity {
 	public static User signUp() {
 		return User.builder()
 			.build();
+	}
+
+	public UserBook addBook(Book book) {
+		// 책을 책장에 추가하는 비즈니스 로직
+		return UserBook.of(this, book.getId());
 	}
 }
