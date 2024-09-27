@@ -1,7 +1,9 @@
 package oz.bookiarybacked.presentation.api;
 
 import java.net.URI;
+import java.util.concurrent.TimeUnit;
 
+import org.springframework.http.CacheControl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,9 +38,11 @@ public class AuthApiController {
 	) {
 		URI redirectUri = authService.getLoginUrl(provider);
 		ApiResult<Void> result = ApiResult.of(HttpStatus.FOUND);
+		CacheControl cache = CacheControl.maxAge(30, TimeUnit.DAYS).cachePublic(); // 변경이 거의 발생하지 않기 때문에 캐싱 처리 (1달)
 
 		return ResponseEntity
 			.status(HttpStatus.FOUND)
+			.cacheControl(cache)
 			.location(redirectUri)
 			.body(result);
 	}
