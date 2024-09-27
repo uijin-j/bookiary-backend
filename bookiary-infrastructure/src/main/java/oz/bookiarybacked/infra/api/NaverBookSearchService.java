@@ -7,11 +7,11 @@ import org.springframework.web.client.RestClient;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import lombok.RequiredArgsConstructor;
-import oz.bookiarybacked.application.book.BookSearchService;
-import oz.bookiarybacked.application.book.dto.BookDto;
 import oz.bookiarybacked.application.book.dto.request.BookSearchParam;
 import oz.bookiarybacked.application.common.dto.Page;
+import oz.bookiarybacked.application.infra.BookSearchService;
 import oz.bookiarybacked.config.properties.NaverSearchProperties;
+import oz.bookiarybacked.domain.book.dto.BookDto;
 import oz.bookiarybacked.infra.api.dto.response.BookSearchRes;
 
 /**
@@ -31,7 +31,7 @@ public class NaverBookSearchService implements BookSearchService {
 	public Page<BookDto> search(BookSearchParam searchParam) {
 		return Objects.requireNonNull(
 			REST_CLIENT.get()
-				.uri(buildUri(searchParam))
+				.uri(builSearchdUri(searchParam))
 				.header(CLIENT_ID, properties.clientId())
 				.header(CLIENT_SECRET, properties.clientSecret())
 				.retrieve()
@@ -39,12 +39,36 @@ public class NaverBookSearchService implements BookSearchService {
 		).toPage();
 	}
 
-	private String buildUri(BookSearchParam param) {
+	@Override
+	public BookDto search(String isbn) {
+		BookSearchRes response = REST_CLIENT.get()
+			.uri(builSearchDetaildUri(isbn))
+			.header(CLIENT_ID, properties.clientId())
+			.header(CLIENT_SECRET, properties.clientSecret())
+			.retrieve()
+			.body(BookSearchRes.class);
+
+		if (response.items().isEmpty()) {
+			throw new RuntimeException("책 정보를 찾을 수 없습니다.");
+		}
+
+		return response.items().get(0).toBookDto();
+	}
+
+	private String builSearchdUri(BookSearchParam param) {
 		return UriComponentsBuilder
 			.fromUriString(properties.searchRequestUri())
 			.queryParam("query", param.getKeyword())
 			.queryParam("start", param.getStart())
 			.queryParam("display", param.getSize())
+			.build()
+			.toString();
+	}
+
+	private String builSearchDetaildUri(String isbn) {
+		return UriComponentsBuilder
+			.fromUriString(properties.searchDetailRequestUri())
+			.queryParam("d_isbn", isbn)
 			.build()
 			.toString();
 	}
