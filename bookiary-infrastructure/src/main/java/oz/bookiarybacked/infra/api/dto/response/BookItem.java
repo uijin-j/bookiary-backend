@@ -1,6 +1,6 @@
 package oz.bookiarybacked.infra.api.dto.response;
 
-import oz.bookiarybacked.application.book.dto.BookDto;
+import oz.bookiarybacked.domain.book.dto.BookDto;
 
 public record BookItem(
 	String title,
