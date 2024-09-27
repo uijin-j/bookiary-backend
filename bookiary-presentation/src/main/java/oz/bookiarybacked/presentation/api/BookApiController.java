@@ -13,7 +13,7 @@ import oz.bookiarybacked.application.book.dto.request.BookSearchParam;
 import oz.bookiarybacked.application.common.dto.Page;
 
 @RestController
-@RequestMapping("/api/book")
+@RequestMapping("/api/books")
 @RequiredArgsConstructor
 public class BookApiController {
 	private final BookSearchService bookSearchService;
