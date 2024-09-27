@@ -2,8 +2,8 @@ package oz.bookiarybacked.infra.api.dto.response;
 
 import java.util.List;
 
-import oz.bookiarybacked.application.book.dto.BookDto;
 import oz.bookiarybacked.application.common.dto.Page;
+import oz.bookiarybacked.domain.book.dto.BookDto;
 
 public record BookSearchRes(
 	String lastBuildDate,

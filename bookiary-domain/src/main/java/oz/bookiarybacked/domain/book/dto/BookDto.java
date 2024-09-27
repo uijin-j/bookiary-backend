@@ -1,4 +1,4 @@
-package oz.bookiarybacked.application.book.dto;
+package oz.bookiarybacked.domain.book.dto;
 
 import lombok.Builder;
 
