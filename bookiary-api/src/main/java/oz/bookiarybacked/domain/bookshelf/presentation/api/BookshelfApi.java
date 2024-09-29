@@ -14,8 +14,8 @@ import oz.bookiarybacked.common.dto.PageParam;
 import oz.bookiarybacked.common.presentation.annotation.Login;
 import oz.bookiarybacked.common.presentation.dto.ApiResult;
 import oz.bookiarybacked.domain.bookshelf.application.BookshelfService;
-import oz.bookiarybacked.domain.bookshelf.domain.dto.BookDetailDto;
 import oz.bookiarybacked.domain.bookshelf.domain.dto.BookSummaryDto;
+import oz.bookiarybacked.domain.bookshelf.domain.dto.response.RetrieveBookRes;
 
 @RestController
 @RequestMapping("/api")
@@ -49,12 +49,12 @@ public class BookshelfApi {
 	 * @param bookId 조회할 사용자 책의 식별자
 	 */
 	@GetMapping("/bookshelf/{bookId}")
-	public ResponseEntity<ApiResult<BookDetailDto>> retrieveBook(
+	public ResponseEntity<ApiResult<RetrieveBookRes>> retrieveBook(
 		@Login Long loginId,
 		@PathVariable Long bookId
 	) {
-		BookDetailDto data = bookshelfService.retrieveBook(loginId, bookId);
-		ApiResult<BookDetailDto> result = ApiResult.ok(data);
+		RetrieveBookRes data = bookshelfService.retrieveBook(loginId, bookId);
+		ApiResult<RetrieveBookRes> result = ApiResult.ok(data);
 
 		return ResponseEntity
 			.status(HttpStatus.OK)
