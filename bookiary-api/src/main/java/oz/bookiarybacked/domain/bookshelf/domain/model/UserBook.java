@@ -54,4 +54,10 @@ public class UserBook extends BaseTimeEntity {
 			throw new PermissionDeniedException(PERMISSION_DENIED);
 		}
 	}
+
+	public void checkAddNotePermission(long userId) {
+		if (!this.userId.equals(userId)) {
+			throw new PermissionDeniedException(PERMISSION_DENIED);
+		}
+	}
 }
