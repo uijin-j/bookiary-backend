@@ -39,10 +39,21 @@ public class BookshelfService {
 		return userBookQueryRepository.retrieveBook(userBookId);
 	}
 
+	@Transactional
+	public void takeBookOff(Long loginId, Long bookId) {
+		userBookRepository.findById(bookId)
+			.ifPresent(book -> checkPermissionAndTakeOff(loginId, bookId, book));
+	}
+
 	private void checkPermission(Long loginId, Long id) {
 		// 책장 조회는 본인만 가능
 		if (!Objects.equals(loginId, id)) {
 			throw new PermissionDeniedException(PERMISSION_DENIED);
 		}
+	}
+
+	private void checkPermissionAndTakeOff(Long loginId, Long bookId, UserBook book) {
+		book.checkDeletePermission(loginId);
+		userBookRepository.deleteById(bookId);
 	}
 }
