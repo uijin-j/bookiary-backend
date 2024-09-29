@@ -13,4 +13,7 @@ public record Page<T>(
 		return new Page<T>(total, start, size, contents);
 	}
 
+	public static <T> Page<T> of(int total, int start, List<T> contents) {
+		return new Page<T>(total, start, contents.size(), contents);
+	}
 }
