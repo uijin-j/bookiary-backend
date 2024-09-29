@@ -1,5 +1,7 @@
 package oz.bookiarybacked.domain.bookshelf.domain.model;
 
+import static oz.bookiarybacked.exception.ErrorMessages.*;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,6 +14,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import oz.bookiarybacked.common.BaseTimeEntity;
+import oz.bookiarybacked.common.exception.PermissionDeniedException;
 
 @Entity
 @Table(name = "user_book")
@@ -36,5 +39,12 @@ public class UserBook extends BaseTimeEntity {
 			.userId(userId)
 			.bookId(bookId)
 			.build();
+	}
+
+	public void checkReadPermission(Long userId) {
+		// 책 상세 조회는 본인만 가능
+		if (!this.userId.equals(userId)) {
+			throw new PermissionDeniedException(PERMISSION_DENIED);
+		}
 	}
 }

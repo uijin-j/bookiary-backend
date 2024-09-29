@@ -1,4 +1,4 @@
-package oz.bookiarybacked.domain.book.domain.dto;
+package oz.bookiarybacked.domain.bookshelf.domain.dto;
 
 public record BookSummaryDto(
 	long id,
