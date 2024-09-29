@@ -2,6 +2,7 @@ package oz.bookiarybacked.domain.bookshelf.presentation.api;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -57,6 +58,19 @@ public class BookshelfApi {
 
 		return ResponseEntity
 			.status(HttpStatus.OK)
+			.body(result);
+	}
+
+	@DeleteMapping("/bookshelf/{bookId}")
+	public ResponseEntity<ApiResult<Void>> takeBookOff(
+		@Login Long loginId,
+		@PathVariable Long bookId
+	) {
+		bookshelfService.takeBookOff(loginId, bookId);
+		ApiResult<Void> result = ApiResult.of(HttpStatus.NO_CONTENT);
+
+		return ResponseEntity
+			.status(HttpStatus.NO_CONTENT)
 			.body(result);
 	}
 }
