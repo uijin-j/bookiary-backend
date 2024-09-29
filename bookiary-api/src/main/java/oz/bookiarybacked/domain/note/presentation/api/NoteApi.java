@@ -21,7 +21,7 @@ public class NoteApi {
 	private final NoteService noteService;
 
 	@PostMapping
-	public ResponseEntity<ApiResult<Void>> createNote(
+	public ResponseEntity<ApiResult<Void>> create(
 		@Login Long loginId,
 		@Valid @RequestBody NoteCreateRequest request
 	) {
