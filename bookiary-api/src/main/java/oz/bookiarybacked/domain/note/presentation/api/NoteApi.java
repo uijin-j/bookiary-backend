@@ -2,6 +2,7 @@ package oz.bookiarybacked.domain.note.presentation.api;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -23,6 +24,12 @@ import oz.bookiarybacked.domain.note.application.dto.request.NoteUpdateRequest;
 public class NoteApi {
 	private final NoteService noteService;
 
+	/**
+	 * 노트 생성
+	 * @param loginId
+	 * @param request
+	 * @return
+	 */
 	@PostMapping
 	public ResponseEntity<ApiResult<Void>> create(
 		@Login Long loginId,
@@ -43,6 +50,19 @@ public class NoteApi {
 		@Valid @RequestBody NoteUpdateRequest request
 	) {
 		noteService.update(loginId, id, request);
+		ApiResult<Void> result = ApiResult.of(HttpStatus.OK);
+
+		return ResponseEntity
+			.status(HttpStatus.OK)
+			.body(result);
+	}
+
+	@DeleteMapping("/{id}")
+	public ResponseEntity<ApiResult<Void>> delete(
+		@Login Long loginId,
+		@PathVariable Long id
+	) {
+		noteService.delete(loginId, id);
 		ApiResult<Void> result = ApiResult.of(HttpStatus.OK);
 
 		return ResponseEntity
