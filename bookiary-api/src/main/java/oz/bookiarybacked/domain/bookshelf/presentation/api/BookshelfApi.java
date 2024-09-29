@@ -24,16 +24,16 @@ public class BookshelfApi {
 	/**
 	 * 책장 조회 API
 	 * @param loginId 로그인 사용자 식별자
-	 * @param id 조회할 책장 주인의 식별자
+	 * @param userId 조회할 책장 주인의 식별자
 	 * @param pageParam 페이지 파라미터 (시작 페이지, 페이지 크기)
 	 */
-	@GetMapping("/user/{id}/bookshelf")
+	@GetMapping("/user/{userId}/bookshelf")
 	public ResponseEntity<ApiResult<Page<BookSummaryDto>>> retrieveBookshelf(
 		@Login Long loginId,
-		@PathVariable Long id,
+		@PathVariable Long userId,
 		PageParam pageParam
 	) {
-		Page<BookSummaryDto> data = bookshelfService.retrieveBooks(loginId, id, pageParam);
+		Page<BookSummaryDto> data = bookshelfService.retrieveBooks(loginId, userId, pageParam);
 		ApiResult<Page<BookSummaryDto>> result = ApiResult.ok(data);
 
 		return ResponseEntity
