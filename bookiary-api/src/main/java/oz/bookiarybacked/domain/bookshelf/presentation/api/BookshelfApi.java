@@ -12,8 +12,8 @@ import oz.bookiarybacked.common.dto.Page;
 import oz.bookiarybacked.common.dto.PageParam;
 import oz.bookiarybacked.common.presentation.annotation.Login;
 import oz.bookiarybacked.common.presentation.dto.ApiResult;
-import oz.bookiarybacked.domain.book.domain.dto.BookSummaryDto;
 import oz.bookiarybacked.domain.bookshelf.application.BookshelfService;
+import oz.bookiarybacked.domain.bookshelf.domain.dto.BookSummaryDto;
 
 @RestController
 @RequestMapping("/api")

@@ -11,7 +11,8 @@ import lombok.RequiredArgsConstructor;
 import oz.bookiarybacked.common.dto.Page;
 import oz.bookiarybacked.common.dto.PageParam;
 import oz.bookiarybacked.common.exception.PermissionDeniedException;
-import oz.bookiarybacked.domain.book.domain.dto.BookSummaryDto;
+import oz.bookiarybacked.domain.bookshelf.domain.dto.BookDetailDto;
+import oz.bookiarybacked.domain.bookshelf.domain.dto.BookSummaryDto;
 import oz.bookiarybacked.domain.bookshelf.domain.repository.UserBookQueryRepository;
 
 @Service
