@@ -17,6 +17,7 @@ public final class ErrorMessages {
 
 	// Note
 	public static final String CONTENT_REQUIRED = "메모의 내용은 필수값입니다.";
+	public static final String NOTE_NOT_FOUND = "해당 식별자를 가진 노트가 존재하지 않습니다.";
 
 	// Common
 	public static final String USER_BOOK_ID_REQUIRED = "사용자 도서 식별자는 필수값입니다.";

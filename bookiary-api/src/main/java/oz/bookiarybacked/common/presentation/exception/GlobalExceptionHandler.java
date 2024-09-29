@@ -13,6 +13,7 @@ import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import oz.bookiarybacked.common.exception.DbConsistencyException;
 import oz.bookiarybacked.common.presentation.dto.ApiResult;
 import oz.bookiarybacked.exception.ForbiddenException;
 
@@ -80,6 +81,17 @@ public class GlobalExceptionHandler {
 	/**
 	 * 5XX 에러 처리
 	 */
+	@ExceptionHandler(DbConsistencyException.class)
+	public ResponseEntity<ApiResult<Void>> handleDbConsistencyException(DbConsistencyException e) {
+		log.error(e.getMessage(), e.fillInStackTrace());
+
+		ApiResult<Void> result = ApiResult.error(INTERNAL_SERVER_ERROR, e.getMessage());
+
+		return ResponseEntity
+			.status(INTERNAL_SERVER_ERROR)
+			.body(result);
+	}
+
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<ApiResult<Void>> handleException(Exception e) {
 		log.error(e.getMessage(), e.fillInStackTrace());
