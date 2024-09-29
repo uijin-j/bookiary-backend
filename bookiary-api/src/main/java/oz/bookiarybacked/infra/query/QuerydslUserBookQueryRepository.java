@@ -12,7 +12,6 @@ import com.querydsl.core.types.Expression;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
-import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import oz.bookiarybacked.common.dto.Page;
 import oz.bookiarybacked.common.dto.PageParam;
@@ -23,7 +22,6 @@ import oz.bookiarybacked.domain.bookshelf.domain.repository.UserBookQueryReposit
 @RequiredArgsConstructor
 public class QuerydslUserBookQueryRepository implements UserBookQueryRepository {
 	private final JPAQueryFactory queryFactory;
-	private final EntityManager entityManager;
 
 	@Override
 	public Page<BookSummaryDto> retrieveBookshelf(Long userId, PageParam pageParam) {
@@ -51,7 +49,7 @@ public class QuerydslUserBookQueryRepository implements UserBookQueryRepository 
 	private static Expression<BookSummaryDto> projectBookSummary() {
 		return Projections.constructor(
 			BookSummaryDto.class,
-			book.id,
+			userBook.id,
 			book.title,
 			book.imageUrl
 		);
