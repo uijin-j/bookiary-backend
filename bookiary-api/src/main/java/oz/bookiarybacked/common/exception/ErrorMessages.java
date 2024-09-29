@@ -11,6 +11,9 @@ public final class ErrorMessages {
 	// Book
 	public static final String KEYWORD_REQUIRED = "검색어는 필수값입니다.";
 
+	// UserBook
+	public static final String USER_BOOK_NOT_FOUND = "해당 식별자를 가진 책이 존재하지 않습니다.";
+
 	// Common
 	public static final String PERMISSION_DENIED = "권한이 없습니다.";
 }
