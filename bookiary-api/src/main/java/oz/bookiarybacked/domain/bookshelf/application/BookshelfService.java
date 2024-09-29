@@ -12,8 +12,8 @@ import lombok.RequiredArgsConstructor;
 import oz.bookiarybacked.common.dto.Page;
 import oz.bookiarybacked.common.dto.PageParam;
 import oz.bookiarybacked.common.exception.PermissionDeniedException;
-import oz.bookiarybacked.domain.bookshelf.domain.dto.BookDetailDto;
 import oz.bookiarybacked.domain.bookshelf.domain.dto.BookSummaryDto;
+import oz.bookiarybacked.domain.bookshelf.domain.dto.response.RetrieveBookRes;
 import oz.bookiarybacked.domain.bookshelf.domain.model.UserBook;
 import oz.bookiarybacked.domain.bookshelf.domain.repository.UserBookQueryRepository;
 import oz.bookiarybacked.domain.bookshelf.domain.repository.UserBookRepository;
@@ -30,7 +30,7 @@ public class BookshelfService {
 		return userBookQueryRepository.retrieveBookshelf(userId, pageParam);
 	}
 
-	public BookDetailDto retrieveBook(Long loginId, Long userBookId) {
+	public RetrieveBookRes retrieveBook(Long loginId, Long userBookId) {
 		UserBook book = userBookRepository.findById(userBookId)
 			.orElseThrow(() -> new EntityNotFoundException(USER_BOOK_NOT_FOUND));
 

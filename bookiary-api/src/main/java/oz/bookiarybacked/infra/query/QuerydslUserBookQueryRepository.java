@@ -2,6 +2,7 @@ package oz.bookiarybacked.infra.query;
 
 import static oz.bookiarybacked.domain.book.domain.model.QBook.*;
 import static oz.bookiarybacked.domain.bookshelf.domain.model.QUserBook.*;
+import static oz.bookiarybacked.domain.note.domain.model.QNote.*;
 
 import java.util.List;
 import java.util.Objects;
@@ -17,6 +18,8 @@ import oz.bookiarybacked.common.dto.Page;
 import oz.bookiarybacked.common.dto.PageParam;
 import oz.bookiarybacked.domain.bookshelf.domain.dto.BookDetailDto;
 import oz.bookiarybacked.domain.bookshelf.domain.dto.BookSummaryDto;
+import oz.bookiarybacked.domain.bookshelf.domain.dto.NoteDto;
+import oz.bookiarybacked.domain.bookshelf.domain.dto.response.RetrieveBookRes;
 import oz.bookiarybacked.domain.bookshelf.domain.repository.UserBookQueryRepository;
 
 @Repository
@@ -48,14 +51,23 @@ public class QuerydslUserBookQueryRepository implements UserBookQueryRepository 
 	}
 
 	@Override
-	public BookDetailDto retrieveBook(Long userBookId) {
-		return queryFactory
+	public RetrieveBookRes retrieveBook(Long userBookId) {
+		BookDetailDto bookInfo = queryFactory
 			.select(projectBookDetail())
 			.from(userBook)
 			.join(book)
 			.on(userBook.bookId.eq(book.id))
 			.where(userBook.id.eq(userBookId))
 			.fetchOne();
+
+		List<NoteDto> notes = queryFactory
+			.select(projectNote())
+			.from(note)
+			.where(note.userBookId.eq(userBookId))
+			.orderBy(note.order.asc())
+			.fetch();
+
+		return RetrieveBookRes.of(bookInfo, notes);
 	}
 
 	private static Expression<BookSummaryDto> projectBookSummary() {
@@ -77,6 +89,15 @@ public class QuerydslUserBookQueryRepository implements UserBookQueryRepository 
 			book.publisher,
 			book.publishedAt,
 			book.description
+		);
+	}
+
+	private static Expression<NoteDto> projectNote() {
+		return Projections.constructor(
+			NoteDto.class,
+			note.id,
+			note.content,
+			note.createdAt
 		);
 	}
 }
