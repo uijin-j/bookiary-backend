@@ -41,4 +41,8 @@ public class Note extends BaseTimeEntity {
 			.order(order)
 			.build();
 	}
+
+	public void modifyContent(String content) {
+		this.content = content;
+	}
 }

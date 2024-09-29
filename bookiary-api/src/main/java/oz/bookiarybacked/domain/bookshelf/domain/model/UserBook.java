@@ -55,6 +55,10 @@ public class UserBook extends BaseTimeEntity {
 		validateOwner(userId);
 	}
 
+	public void checkUpdateNotePermission(long userId) {
+		validateOwner(userId);
+	}
+
 	private void validateOwner(Long userId) {
 		if (!this.userId.equals(userId)) {
 			throw new PermissionDeniedException(PERMISSION_DENIED);
