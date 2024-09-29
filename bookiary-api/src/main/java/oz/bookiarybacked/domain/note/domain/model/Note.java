@@ -1,5 +1,7 @@
 package oz.bookiarybacked.domain.note.domain.model;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -34,6 +36,12 @@ public class Note extends BaseTimeEntity {
 	@Column(name = "note_order", nullable = false)
 	private int order;
 
+	@Column(name = "deleted", nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
+	private boolean deleted;
+
+	@Column(name = "deleted_at")
+	private LocalDateTime deletedAt;
+
 	public static Note of(Long userBookId, String content, int order) {
 		return Note.builder()
 			.userBookId(userBookId)
@@ -44,5 +52,10 @@ public class Note extends BaseTimeEntity {
 
 	public void modifyContent(String content) {
 		this.content = content;
+	}
+
+	public void delete() {
+		this.deleted = true;
+		this.deletedAt = LocalDateTime.now();
 	}
 }
