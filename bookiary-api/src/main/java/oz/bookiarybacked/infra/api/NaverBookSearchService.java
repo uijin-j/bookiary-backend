@@ -7,10 +7,10 @@ import org.springframework.web.client.RestClient;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import lombok.RequiredArgsConstructor;
-import oz.bookiarybacked.application.book.dto.request.BookSearchParam;
 import oz.bookiarybacked.common.dto.Page;
 import oz.bookiarybacked.config.properties.NaverSearchProperties;
 import oz.bookiarybacked.domain.book.application.BookSearchService;
+import oz.bookiarybacked.domain.book.application.dto.request.BookSearchParam;
 import oz.bookiarybacked.domain.book.domain.dto.BookDto;
 import oz.bookiarybacked.infra.api.dto.response.NaverBookSearchRes;
 

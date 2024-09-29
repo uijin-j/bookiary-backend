@@ -1,25 +1,29 @@
-package oz.bookiarybacked.application.book.dto.request;
+package oz.bookiarybacked.domain.book.application.dto.request;
 
 import static java.util.Objects.*;
 import static oz.bookiarybacked.exception.ErrorMessages.*;
 
 import lombok.Getter;
+import oz.bookiarybacked.common.dto.PageParam;
 
 @Getter
 public final class BookSearchParam {
-	private static final int DEFAULT_START = 1;
-	private static final int DEFAULT_SIZE = 10;
-
 	private final String keyword;
-	private final int start;
-	private final int size;
+	private final PageParam pageParam;
 
 	public BookSearchParam(String keyword, Integer start, Integer size) {
 		validateKeyword(keyword);
 
 		this.keyword = keyword;
-		this.start = isNull(start) ? DEFAULT_START : start;
-		this.size = isNull(size) ? DEFAULT_SIZE : size;
+		this.pageParam = new PageParam(start, size);
+	}
+
+	public int getSize() {
+		return pageParam.getSize();
+	}
+
+	public int getStart() {
+		return pageParam.getStart();
 	}
 
 	private void validateKeyword(String keyword) {
