@@ -2,7 +2,7 @@ package oz.bookiarybacked.infra.api.dto.response;
 
 import oz.bookiarybacked.domain.book.domain.dto.BookDto;
 
-public record BookItem(
+public record NaverBookItem(
 	String title,
 	String link,
 	String image,

@@ -12,7 +12,7 @@ import oz.bookiarybacked.common.dto.Page;
 import oz.bookiarybacked.config.properties.NaverSearchProperties;
 import oz.bookiarybacked.domain.book.application.BookSearchService;
 import oz.bookiarybacked.domain.book.domain.dto.BookDto;
-import oz.bookiarybacked.infra.api.dto.response.BookSearchRes;
+import oz.bookiarybacked.infra.api.dto.response.NaverBookSearchRes;
 
 /**
  * 네이버 책 검색 서비스
@@ -35,18 +35,18 @@ public class NaverBookSearchService implements BookSearchService {
 				.header(CLIENT_ID, properties.clientId())
 				.header(CLIENT_SECRET, properties.clientSecret())
 				.retrieve()
-				.body(BookSearchRes.class)
+				.body(NaverBookSearchRes.class)
 		).toPage();
 	}
 
 	@Override
 	public BookDto search(String isbn) {
-		BookSearchRes response = REST_CLIENT.get()
+		NaverBookSearchRes response = REST_CLIENT.get()
 			.uri(builSearchDetaildUri(isbn))
 			.header(CLIENT_ID, properties.clientId())
 			.header(CLIENT_SECRET, properties.clientSecret())
 			.retrieve()
-			.body(BookSearchRes.class);
+			.body(NaverBookSearchRes.class);
 
 		if (response.items().isEmpty()) {
 			throw new RuntimeException("책 정보를 찾을 수 없습니다.");
