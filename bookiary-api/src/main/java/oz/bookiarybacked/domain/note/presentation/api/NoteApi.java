@@ -25,10 +25,9 @@ public class NoteApi {
 	private final NoteService noteService;
 
 	/**
-	 * 노트 생성
-	 * @param loginId
-	 * @param request
-	 * @return
+	 * 노트 생성 API
+	 * @param loginId 로그인 사용자 식별자
+	 * @param request 노트 생성 요청
 	 */
 	@PostMapping
 	public ResponseEntity<ApiResult<Void>> create(
@@ -43,6 +42,12 @@ public class NoteApi {
 			.body(result);
 	}
 
+	/**
+	 * 노트 수정 API
+	 * @param loginId 로그인 사용자 식별자
+	 * @param id 노트 식별자
+	 * @param request 노트 수정 요청
+	 */
 	@PutMapping("/{id}")
 	public ResponseEntity<ApiResult<Void>> update(
 		@Login Long loginId,
@@ -57,6 +62,11 @@ public class NoteApi {
 			.body(result);
 	}
 
+	/**
+	 * 노트 삭제 API (soft delete)
+	 * @param loginId 로그인 사용자 식별자
+	 * @param id 노트 식별자
+	 */
 	@DeleteMapping("/{id}")
 	public ResponseEntity<ApiResult<Void>> delete(
 		@Login Long loginId,
