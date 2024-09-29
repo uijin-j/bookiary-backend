@@ -13,7 +13,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import oz.bookiarybacked.common.BaseTimeEntity;
+import oz.bookiarybacked.common.domain.model.BaseTimeEntity;
 import oz.bookiarybacked.common.exception.PermissionDeniedException;
 
 @Entity
