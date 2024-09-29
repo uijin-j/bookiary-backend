@@ -1,10 +1,11 @@
 package oz.bookiarybacked.domain.book.application;
 
-import static oz.bookiarybacked.exception.ErrorMessages.*;
+import static oz.bookiarybacked.common.exception.ErrorMessages.*;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import oz.bookiarybacked.domain.book.domain.dto.BookDto;
@@ -39,7 +40,12 @@ public class BookService {
 		User user = userRepository.findById(userId)
 			.orElseThrow(() -> new EntityNotFoundException(USER_NOT_FOUND));
 
-		// Step 3. 책을 책장에 추가
+		// Step 3. 책이 이미 책장에 있는지 검사
+		if (userBookRepository.existsByUserIdAndBookId(userId, book.getId())) {
+			throw new EntityExistsException(USER_BOOK_ALREADY_EXISTS);
+		}
+
+		// Step 4. 책을 책장에 추가
 		UserBook userBook = user.addBook(book);
 		userBookRepository.save(userBook);
 	}
