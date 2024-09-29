@@ -10,4 +10,7 @@ public final class ErrorMessages {
 
 	// Book
 	public static final String KEYWORD_REQUIRED = "검색어는 필수값입니다.";
+
+	// Common
+	public static final String PERMISSION_DENIED = "권한이 없습니다.";
 }
