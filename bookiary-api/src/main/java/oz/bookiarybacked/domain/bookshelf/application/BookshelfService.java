@@ -1,6 +1,6 @@
 package oz.bookiarybacked.domain.bookshelf.application;
 
-import static oz.bookiarybacked.exception.ErrorMessages.*;
+import static oz.bookiarybacked.common.exception.ErrorMessages.*;
 
 import java.util.Objects;
 

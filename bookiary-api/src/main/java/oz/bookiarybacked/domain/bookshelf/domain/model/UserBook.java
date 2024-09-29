@@ -1,6 +1,6 @@
 package oz.bookiarybacked.domain.bookshelf.domain.model;
 
-import static oz.bookiarybacked.exception.ErrorMessages.*;
+import static oz.bookiarybacked.common.exception.ErrorMessages.*;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
