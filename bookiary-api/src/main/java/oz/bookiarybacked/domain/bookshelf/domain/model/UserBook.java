@@ -43,21 +43,22 @@ public class UserBook extends BaseTimeEntity {
 
 	public void checkReadPermission(Long userId) {
 		// 책 상세 조회는 본인만 가능
-		if (!this.userId.equals(userId)) {
-			throw new PermissionDeniedException(PERMISSION_DENIED);
-		}
+		validateOwner(userId);
 	}
 
 	public void checkDeletePermission(Long loginId) {
 		// 책 삭제는 본인만 가능
-		if (!this.userId.equals(loginId)) {
-			throw new PermissionDeniedException(PERMISSION_DENIED);
-		}
+		validateOwner(loginId);
 	}
 
 	public void checkAddNotePermission(long userId) {
+		validateOwner(userId);
+	}
+
+	private void validateOwner(Long userId) {
 		if (!this.userId.equals(userId)) {
 			throw new PermissionDeniedException(PERMISSION_DENIED);
 		}
 	}
+
 }
