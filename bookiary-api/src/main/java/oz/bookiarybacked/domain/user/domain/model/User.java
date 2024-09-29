@@ -11,7 +11,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import oz.bookiarybacked.common.BaseTimeEntity;
+import oz.bookiarybacked.common.domain.model.BaseTimeEntity;
 import oz.bookiarybacked.domain.book.domain.model.Book;
 import oz.bookiarybacked.domain.bookshelf.domain.model.UserBook;
 

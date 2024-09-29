@@ -1,4 +1,4 @@
-package oz.bookiarybacked.common;
+package oz.bookiarybacked.common.domain.model;
 
 import java.time.LocalDateTime;
 
@@ -15,7 +15,7 @@ import lombok.Getter;
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 public class BaseTimeEntity {
-	
+
 	@CreatedDate
 	@Column(name = "created_at", nullable = false, updatable = false)
 	private LocalDateTime createdAt;

@@ -54,4 +54,20 @@ public class NoteService {
 		// Step 3. 노트 수정
 		note.modifyContent(request.content());
 	}
+
+	@Transactional
+	public void delete(Long loginId, Long id) {
+		// Step 1. 노트 조회 (soft delete인 경우 삭제하려는 노트가 없으면 예외 발생)
+		Note note = noteRepository.findById(id)
+			.orElseThrow(() -> new EntityNotFoundException(NOTE_NOT_FOUND));
+
+		// Step 2. 노트 삭제 권한 검사
+		UserBook book = userBookRepository.findById(note.getUserBookId())
+			.orElseThrow(() -> new DbConsistencyException(note.getId() + " 노트의 책이 존재하지 않습니다."));
+
+		book.checkDeleteNotePermission(loginId);
+
+		// Step 3. 노트 삭제
+		note.delete();
+	}
 }

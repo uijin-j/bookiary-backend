@@ -63,7 +63,7 @@ public class QuerydslUserBookQueryRepository implements UserBookQueryRepository 
 		List<NoteDto> notes = queryFactory
 			.select(projectNote())
 			.from(note)
-			.where(note.userBookId.eq(userBookId))
+			.where(note.userBookId.eq(userBookId), note.deleted.isFalse())
 			.orderBy(note.order.asc())
 			.fetch();
 

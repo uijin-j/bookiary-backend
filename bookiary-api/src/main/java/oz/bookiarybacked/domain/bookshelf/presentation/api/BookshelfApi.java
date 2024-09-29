@@ -61,6 +61,11 @@ public class BookshelfApi {
 			.body(result);
 	}
 
+	/**
+	 * 책장에서 책 꺼내기 API (hard delete)
+	 * @param loginId 로그인 사용자 식별자
+	 * @param bookId 꺼낼 책의 식별자
+	 */
 	@DeleteMapping("/bookshelf/{bookId}")
 	public ResponseEntity<ApiResult<Void>> takeBookOff(
 		@Login Long loginId,

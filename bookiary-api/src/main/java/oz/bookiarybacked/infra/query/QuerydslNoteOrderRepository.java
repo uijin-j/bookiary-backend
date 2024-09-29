@@ -21,7 +21,7 @@ public class QuerydslNoteOrderRepository implements NoteOrderRepository {
 		return Objects.requireNonNull(
 			queryFactory.select(note.id.count())
 				.from(note)
-				.where(note.userBookId.eq(userBookId))
+				.where(note.userBookId.eq(userBookId), note.deleted.isFalse())
 				.fetchOne()
 		).intValue();
 	}

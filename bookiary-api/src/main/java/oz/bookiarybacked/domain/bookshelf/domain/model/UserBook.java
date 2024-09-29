@@ -13,7 +13,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import oz.bookiarybacked.common.BaseTimeEntity;
+import oz.bookiarybacked.common.domain.model.BaseTimeEntity;
 import oz.bookiarybacked.common.exception.PermissionDeniedException;
 
 @Entity
@@ -59,10 +59,13 @@ public class UserBook extends BaseTimeEntity {
 		validateOwner(userId);
 	}
 
+	public void checkDeleteNotePermission(Long loginId) {
+		validateOwner(loginId);
+	}
+
 	private void validateOwner(Long userId) {
 		if (!this.userId.equals(userId)) {
 			throw new PermissionDeniedException(PERMISSION_DENIED);
 		}
 	}
-
 }
