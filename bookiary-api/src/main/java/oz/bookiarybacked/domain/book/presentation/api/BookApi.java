@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
-import oz.bookiarybacked.annotation.Login;
 import oz.bookiarybacked.common.dto.Page;
+import oz.bookiarybacked.common.presentation.annotation.Login;
 import oz.bookiarybacked.common.presentation.dto.ApiResult;
 import oz.bookiarybacked.domain.book.application.BookSearchService;
 import oz.bookiarybacked.domain.book.application.BookService;

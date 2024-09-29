@@ -10,7 +10,7 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
-import oz.bookiarybacked.annotation.Login;
+import oz.bookiarybacked.common.presentation.annotation.Login;
 import oz.bookiarybacked.exception.ForbiddenException;
 
 public class LoginArgumentResolver implements HandlerMethodArgumentResolver {
