@@ -1,7 +1,7 @@
 package oz.bookiarybacked.domain.book.application.dto.request;
 
 import static java.util.Objects.*;
-import static oz.bookiarybacked.exception.ErrorMessages.*;
+import static oz.bookiarybacked.common.exception.ErrorMessages.*;
 
 import lombok.Getter;
 import oz.bookiarybacked.common.dto.PageParam;

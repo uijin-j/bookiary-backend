@@ -1,6 +1,6 @@
 package oz.bookiarybacked.domain.bookshelf.domain.model;
 
-import static oz.bookiarybacked.exception.ErrorMessages.*;
+import static oz.bookiarybacked.common.exception.ErrorMessages.*;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -51,6 +51,12 @@ public class UserBook extends BaseTimeEntity {
 	public void checkDeletePermission(Long loginId) {
 		// 책 삭제는 본인만 가능
 		if (!this.userId.equals(loginId)) {
+			throw new PermissionDeniedException(PERMISSION_DENIED);
+		}
+	}
+
+	public void checkAddNotePermission(long userId) {
+		if (!this.userId.equals(userId)) {
 			throw new PermissionDeniedException(PERMISSION_DENIED);
 		}
 	}

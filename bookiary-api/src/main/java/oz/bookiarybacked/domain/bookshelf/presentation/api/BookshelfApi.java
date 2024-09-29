@@ -29,7 +29,7 @@ public class BookshelfApi {
 	 * @param userId 조회할 책장 주인의 식별자
 	 * @param pageParam 페이지 파라미터 (시작 페이지, 페이지 크기)
 	 */
-	@GetMapping("/user/{userId}/bookshelf")
+	@GetMapping("/users/{userId}/bookshelf")
 	public ResponseEntity<ApiResult<Page<BookSummaryDto>>> retrieveBookshelf(
 		@Login Long loginId,
 		@PathVariable Long userId,

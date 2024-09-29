@@ -5,4 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import oz.bookiarybacked.domain.bookshelf.domain.model.UserBook;
 
 public interface UserBookRepository extends JpaRepository<UserBook, Long> {
+	boolean existsByUserIdAndBookId(Long userId, Long id);
 }

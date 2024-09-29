@@ -1,6 +1,6 @@
 package oz.bookiarybacked.domain.user.domain.service;
 
-import static oz.bookiarybacked.exception.ErrorMessages.*;
+import static oz.bookiarybacked.common.exception.ErrorMessages.*;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
