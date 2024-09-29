@@ -47,4 +47,11 @@ public class UserBook extends BaseTimeEntity {
 			throw new PermissionDeniedException(PERMISSION_DENIED);
 		}
 	}
+
+	public void checkDeletePermission(Long loginId) {
+		// 책 삭제는 본인만 가능
+		if (!this.userId.equals(loginId)) {
+			throw new PermissionDeniedException(PERMISSION_DENIED);
+		}
+	}
 }
