@@ -47,12 +47,36 @@ public class QuerydslUserBookQueryRepository implements UserBookQueryRepository 
 		return Page.of(total, pageParam.getStart(), results);
 	}
 
+	@Override
+	public BookDetailDto retrieveBook(Long userBookId) {
+		return queryFactory
+			.select(projectBookDetail())
+			.from(userBook)
+			.join(book)
+			.on(userBook.bookId.eq(book.id))
+			.where(userBook.id.eq(userBookId))
+			.fetchOne();
+	}
+
 	private static Expression<BookSummaryDto> projectBookSummary() {
 		return Projections.constructor(
 			BookSummaryDto.class,
 			userBook.id,
 			book.title,
 			book.imageUrl
+		);
+	}
+
+	private Expression<BookDetailDto> projectBookDetail() {
+		return Projections.constructor(
+			BookDetailDto.class,
+			userBook.id,
+			book.title,
+			book.imageUrl,
+			book.author,
+			book.publisher,
+			book.publishedAt,
+			book.description
 		);
 	}
 }
