@@ -8,8 +8,9 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-security'
 
-    // PostgreSQL
-    implementation 'org.postgresql:postgresql'
+    // MySQL
+    runtimeOnly 'com.mysql:mysql-connector-j'
+
 
     // QyeryDSL
     implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
