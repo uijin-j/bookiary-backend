@@ -2,6 +2,8 @@ package oz.bookiarybacked.auth.domain.service;
 
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 
 import javax.crypto.SecretKey;
@@ -45,8 +47,9 @@ public class JwtManager {
 		return parseClaims(token).get(USER_ID_CLAIM, Long.class);
 	}
 
-	public Long getExpiredAt(String token) {
-		return parseClaims(token).getExpiration().getTime();
+	public LocalDateTime getExpiredAt(String token) {
+		long timestampMillis = parseClaims(token).getExpiration().getTime();
+		return LocalDateTime.ofInstant(Instant.ofEpochMilli(timestampMillis), ZoneId.systemDefault());
 	}
 
 	private String generateToken(User user, long expiredAfter) {
