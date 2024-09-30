@@ -17,6 +17,8 @@
 ## Architecture
 
 ## ERD
+![책단장](https://github.com/user-attachments/assets/b4a5e1fd-caa9-4e06-a548-97016284a236)
+
 
 <details>
   <summary>📂 서비스 주요 기능</summary>
