@@ -1,5 +1,7 @@
 package oz.bookiarybacked.auth.domain.model;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,13 +31,13 @@ public class RefreshToken {
 	@Column(name = "user_id", nullable = false)
 	private Long userId;
 
-	@Column(name = "token")
+	@Column(name = "token", nullable = false)
 	private String token;
 
-	@Column(name = "expire_at")
-	private Long expireAt;
+	@Column(name = "expire_at", nullable = false)
+	private LocalDateTime expireAt;
 
-	public static RefreshToken of(Long userId, String token, Long expireAt) {
+	public static RefreshToken of(Long userId, String token, LocalDateTime expireAt) {
 		return RefreshToken.builder()
 			.userId(userId)
 			.token(token)
@@ -50,6 +52,6 @@ public class RefreshToken {
 	}
 
 	public boolean isExpired() {
-		return System.currentTimeMillis() > expireAt;
+		return expireAt.isBefore(LocalDateTime.now());
 	}
 }
