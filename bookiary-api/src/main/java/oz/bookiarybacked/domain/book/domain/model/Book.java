@@ -47,7 +47,7 @@ public class Book extends BaseTimeEntity {
 	@Column(name = "naver_book_url")
 	private String naverBookUrl;
 
-	@Column(name = "description", length = 1000)
+	@Column(name = "description")
 	private String description;
 
 	@Column(name = "published_at")

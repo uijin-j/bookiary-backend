@@ -31,7 +31,7 @@ public class RefreshToken {
 	@Column(name = "user_id", nullable = false)
 	private Long userId;
 
-	@Column(name = "token")
+	@Column(name = "token", nullable = false)
 	private String token;
 
 	@Column(name = "expire_at", nullable = false)
