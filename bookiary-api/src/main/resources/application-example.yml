@@ -18,6 +18,9 @@ spring:
         dialect: org.hibernate.dialect.MySQLDialect
         format_sql: true
 
+  flyway:
+    enabled: true
+
 jwt:
   issuer: issuer
   secret-key: secret-key
