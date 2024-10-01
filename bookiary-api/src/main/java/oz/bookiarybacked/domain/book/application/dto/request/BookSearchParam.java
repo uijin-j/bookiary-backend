@@ -4,26 +4,22 @@ import static java.util.Objects.*;
 import static oz.bookiarybacked.common.exception.ErrorMessages.*;
 
 import lombok.Getter;
-import oz.bookiarybacked.common.dto.PageParam;
 
 @Getter
 public final class BookSearchParam {
+	private static final int DEFAULT_START = 1;
+	private static final int DEFAULT_SIZE = 10;
+
 	private final String keyword;
-	private final PageParam pageParam;
+	private final int start;
+	private final int size;
 
 	public BookSearchParam(String keyword, Integer start, Integer size) {
 		validateKeyword(keyword);
 
 		this.keyword = keyword;
-		this.pageParam = new PageParam(start, size);
-	}
-
-	public int getSize() {
-		return pageParam.getSize();
-	}
-
-	public int getStart() {
-		return pageParam.getStart();
+		this.start = isNull(start) ? DEFAULT_START : start;
+		this.size = isNull(size) ? DEFAULT_SIZE : size;
 	}
 
 	private void validateKeyword(String keyword) {
