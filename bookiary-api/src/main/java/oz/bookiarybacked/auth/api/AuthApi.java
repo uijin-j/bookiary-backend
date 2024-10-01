@@ -1,6 +1,5 @@
 package oz.bookiarybacked.auth.api;
 
-import java.net.URI;
 import java.util.concurrent.TimeUnit;
 
 import org.springframework.http.CacheControl;
@@ -18,13 +17,14 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import oz.bookiarybacked.auth.application.AuthService;
 import oz.bookiarybacked.auth.application.dto.request.ReissueTokenReq;
+import oz.bookiarybacked.auth.application.dto.response.LoginPageRes;
 import oz.bookiarybacked.auth.application.dto.response.LoginRes;
 import oz.bookiarybacked.common.presentation.dto.ApiResult;
 
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
-public class AuthApi {
+public class AuthApi implements AuthApiDoc {
 
 	private final AuthService authService;
 
