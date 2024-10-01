@@ -21,7 +21,7 @@ import oz.bookiarybacked.domain.note.application.dto.request.NoteUpdateRequest;
 @RestController
 @RequestMapping("/api/notes")
 @RequiredArgsConstructor
-public class NoteApi {
+public class NoteApi implements NoteApiDoc {
 	private final NoteService noteService;
 
 	/**
@@ -73,10 +73,10 @@ public class NoteApi {
 		@PathVariable Long id
 	) {
 		noteService.delete(loginId, id);
-		ApiResult<Void> result = ApiResult.of(HttpStatus.OK);
+		ApiResult<Void> result = ApiResult.of(HttpStatus.NO_CONTENT);
 
 		return ResponseEntity
-			.status(HttpStatus.OK)
+			.status(HttpStatus.NO_CONTENT)
 			.body(result);
 	}
 }
