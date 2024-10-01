@@ -34,17 +34,15 @@ public class AuthApi {
 	 *  - 카카오: /api/oauth/kakao (🔗: https://developers.kakao.com/docs/latest/ko/kakaologin/rest-api)
 	 */
 	@GetMapping("/oauth/{provider}")
-	public ResponseEntity<ApiResult<Void>> getLoginPage(
+	public ResponseEntity<ApiResult<LoginPageRes>> getLoginPage(
 		@PathVariable String provider
 	) {
-		URI redirectUri = authService.getLoginUrl(provider);
-		ApiResult<Void> result = ApiResult.of(HttpStatus.FOUND);
+		LoginPageRes data = authService.getLoginUrl(provider);
+		ApiResult<LoginPageRes> result = ApiResult.of(HttpStatus.OK, data);
 		CacheControl cache = CacheControl.maxAge(30, TimeUnit.DAYS).cachePublic(); // 변경이 거의 발생하지 않기 때문에 캐싱 처리 (1달)
 
-		return ResponseEntity
-			.status(HttpStatus.FOUND)
+		return ResponseEntity.status(HttpStatus.OK)
 			.cacheControl(cache)
-			.location(redirectUri)
 			.body(result);
 	}
 

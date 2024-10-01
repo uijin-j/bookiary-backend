@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import oz.bookiarybacked.auth.application.dto.TokenPair;
 import oz.bookiarybacked.auth.application.dto.request.ReissueTokenReq;
+import oz.bookiarybacked.auth.application.dto.response.LoginPageRes;
 import oz.bookiarybacked.auth.application.dto.response.LoginRes;
 import oz.bookiarybacked.auth.domain.dto.OAuthUser;
 import oz.bookiarybacked.auth.domain.model.AuthProviderType;
@@ -32,9 +33,11 @@ public class AuthService {
 	private final JwtManager jwtManager;
 	private final RefreshTokenRepository refreshTokenRepository;
 
-	public URI getLoginUrl(String providerType) {
+	public LoginPageRes getLoginUrl(String providerType) {
 		OAuthManager oauthManager = oAuthManagerFactory.getOAuthManager(AuthProviderType.from(providerType));
-		return oauthManager.getLoginPageUrl();
+		URI loginPageUrl = oauthManager.getLoginPageUrl();
+		
+		return LoginPageRes.from(loginPageUrl);
 	}
 
 	@Transactional
