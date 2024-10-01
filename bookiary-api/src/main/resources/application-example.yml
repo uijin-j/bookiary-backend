@@ -42,3 +42,12 @@ book:
     client-secret: client-secret
     search-request-uri: https://openapi.naver.com/v1/search/book.json
     search-detail-request-uri: https://openapi.naver.com/v1/search/book_adv.json
+
+springdoc:
+  default-consumes-media-type: application/json
+  default-produces-media-type: application/json
+  swagger-ui:
+    tags-sorter: alpha
+    operations-sorter: method
+    path: 'doc'
+    disable-swagger-default-url: true
