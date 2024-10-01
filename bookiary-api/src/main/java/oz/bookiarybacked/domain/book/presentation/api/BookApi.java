@@ -20,7 +20,7 @@ import oz.bookiarybacked.domain.book.domain.dto.BookDto;
 @RestController
 @RequestMapping("/api/books")
 @RequiredArgsConstructor
-public class BookApi {
+public class BookApi implements BookApiDoc {
 	private final BookSearchService bookSearchService;
 	private final BookService bookService;
 

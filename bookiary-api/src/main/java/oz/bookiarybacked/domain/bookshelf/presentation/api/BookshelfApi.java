@@ -20,7 +20,7 @@ import oz.bookiarybacked.domain.bookshelf.domain.dto.response.RetrieveBookRes;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
-public class BookshelfApi {
+public class BookshelfApi implements BookshelfApiDoc {
 	private final BookshelfService bookshelfService;
 
 	/**
